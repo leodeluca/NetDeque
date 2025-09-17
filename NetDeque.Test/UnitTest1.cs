@@ -1,3 +1,6 @@
+using FluentAssertions;
+using System.Diagnostics;
+
 namespace NetDeque.Test
 
 {
@@ -8,7 +11,9 @@ namespace NetDeque.Test
         {
             var sut = new Deque<int>();
 
-            Assert.Equal(0, sut.Count);
+            //Assert.Equal(0, sut.Count);
+
+            sut.Count.Should().Be(0);
         }
 
         [Fact]
@@ -16,7 +21,9 @@ namespace NetDeque.Test
         {
             var sut = new Deque<int>();
 
-            Assert.True(sut.IsEmpty);
+            //Assert.True(sut.IsEmpty);
+
+            sut.IsEmpty.Should().BeTrue();
         }
 
         [Fact]
@@ -26,7 +33,10 @@ namespace NetDeque.Test
 
             sut.AddBeg(1);
 
-           Assert.Equal(1, sut.PeekBeg());
+           //Assert.Equal(1, sut.PeekBeg());
+
+            sut.PeekBeg().Should().Be(1);
+
         }
 
         [Fact]
@@ -38,8 +48,10 @@ namespace NetDeque.Test
             sut.AddBeg(2);
             sut.AddBeg(3);
             sut.AddBeg(4);
-            
-            Assert.Equal(4, sut.PeekBeg());
+
+            //Assert.Equal(4, sut.PeekBeg());
+
+            sut.PeekBeg().Should().Be(4);
         }
 
         [Fact]
@@ -49,7 +61,9 @@ namespace NetDeque.Test
 
             sut.AddEnd(1);
 
-            Assert.Equal(1, sut.PeekEnd());
+            //Assert.Equal(1, sut.PeekEnd());
+
+            sut.PeekEnd().Should().Be(1);
         }
 
         [Fact]
@@ -62,7 +76,9 @@ namespace NetDeque.Test
             sut.AddEnd(3);
             sut.AddEnd(4);
 
-            Assert.Equal(4, sut.PeekEnd());
+            //Assert.Equal(4, sut.PeekEnd());
+
+            sut.PeekEnd().Should().Be(4);
         }
 
         [Fact]
@@ -72,7 +88,9 @@ namespace NetDeque.Test
 
             Action action = () => sut.RemBeg();
 
-            Assert.Throws<InvalidOperationException>(action);
+            //Assert.Throws<InvalidOperationException>(action);
+
+           action.Should().Throw<InvalidOperationException>();
         }
 
         [Fact]
@@ -86,8 +104,11 @@ namespace NetDeque.Test
 
             sut.RemBeg();
 
-            Assert.True(sut.PeekBeg() == 2);
-            Assert.True(sut.PeekEnd() == 1);
+            //Assert.True(sut.PeekBeg() == 2);
+            //Assert.True(sut.PeekEnd() == 1);
+
+            sut.PeekBeg().Should().Be(2);
+            sut.PeekEnd().Should().Be(1);
         }
 
         [Fact]
@@ -101,7 +122,9 @@ namespace NetDeque.Test
 
             sut.RemBeg();
 
-            Assert.True(sut.Count == 2);
+            //Assert.True(sut.Count == 2);
+
+            sut.Count.Should().Be(2);
         }
 
         [Fact]
@@ -111,7 +134,9 @@ namespace NetDeque.Test
 
             Action action = () => sut.RemEnd();
 
-            Assert.Throws<InvalidOperationException>(action);
+            //Assert.Throws<InvalidOperationException>(action);
+
+            action.Should().Throw<InvalidOperationException>();
         }
 
         [Fact]
@@ -125,8 +150,11 @@ namespace NetDeque.Test
 
             sut.RemEnd();
 
-            Assert.True(sut.PeekBeg() == 1);
-            Assert.True(sut.PeekEnd() == 2);
+            //Assert.True(sut.PeekBeg() == 1);
+            //Assert.True(sut.PeekEnd() == 2);
+
+            sut.PeekBeg().Should().Be(1);
+            sut.PeekEnd().Should().Be(2);
         }
 
         [Fact]
@@ -140,7 +168,9 @@ namespace NetDeque.Test
 
             sut.RemEnd();
 
-            Assert.True(sut.Count == 2);
+            //Assert.True(sut.Count == 2);
+
+            sut.Count.Should().Be(2);
         }
 
         [Fact]
@@ -150,7 +180,9 @@ namespace NetDeque.Test
 
             Action action = () => sut.PeekBeg();
 
-            Assert.Throws<InvalidOperationException>(action);
+            //Assert.Throws<InvalidOperationException>(action);
+
+            action.Should().Throw<InvalidOperationException>();
         }
 
         [Fact]
@@ -160,7 +192,9 @@ namespace NetDeque.Test
 
             Action action = () => sut.PeekEnd();
 
-            Assert.Throws<InvalidOperationException>(action);
+            //Assert.Throws<InvalidOperationException>(action);
+
+            action.Should().Throw<InvalidOperationException>();
         }
 
         [Fact]
@@ -171,8 +205,11 @@ namespace NetDeque.Test
             sut.AddBeg(1);
             sut.AddEnd(2);
 
-            Assert.Equal(1, sut.PeekBeg());
-            Assert.Equal(2, sut.PeekEnd());
+            //Assert.Equal(1, sut.PeekBeg());
+            //Assert.Equal(2, sut.PeekEnd());
+
+            sut.PeekBeg().Should().Be(1);
+            sut.PeekEnd().Should().Be(2);
         }
 
         [Fact]
@@ -190,7 +227,9 @@ namespace NetDeque.Test
 
             var count_after = sut.Count;
 
-            Assert.Equal(count_before, count_after);
+            //Assert.Equal(count_before, count_after);
+
+            count_before.Should().Be(count_after);
         }
 
         [Fact]
@@ -201,14 +240,20 @@ namespace NetDeque.Test
             sut.AddBeg(1);
             sut.AddEnd(2);
 
-            Assert.Equal(1, sut.PeekBeg());
-            Assert.Equal(2, sut.PeekEnd());
+            //Assert.Equal(1, sut.PeekBeg());
+            //Assert.Equal(2, sut.PeekEnd());
+
+            sut.PeekBeg().Should().Be(1);
+            sut.PeekEnd().Should().Be(2);
 
             sut.AddBeg(3);
             sut.AddEnd(4);
 
-            Assert.Equal(3, sut.PeekBeg());
-            Assert.Equal(4, sut.PeekEnd());
+            //Assert.Equal(3, sut.PeekBeg());
+            //Assert.Equal(4, sut.PeekEnd());
+
+            sut.PeekBeg().Should().Be(3);
+            sut.PeekEnd().Should().Be(4);
         }
 
         [Fact]
@@ -221,8 +266,11 @@ namespace NetDeque.Test
 
             sut.RemBeg();
 
-            Assert.Equal(2, sut.PeekBeg());
-            Assert.Equal(1, sut.Count);
+            //Assert.Equal(2, sut.PeekBeg());
+            //Assert.Equal(1, sut.Count);
+
+            sut.PeekBeg().Should().Be(2);
+            sut.Count.Should().Be(1);
         }
 
         [Fact]
@@ -235,29 +283,34 @@ namespace NetDeque.Test
 
             sut.RemEnd();
 
-            Assert.Equal(2, sut.PeekEnd());
-            Assert.Equal(1, sut.Count);
+            //Assert.Equal(2, sut.PeekEnd());
+            //Assert.Equal(1, sut.Count);
+
+            sut.PeekEnd().Should().Be(2);
+            sut.Count.Should().Be(1);
         }
 
         [Fact]
         public void DoNotHaveInvalidElementsAfterManyAddsAndRemoves()
         {
-            var sut = new Deque<int>();
+            var sut = new Deque<string?>();
 
-            sut.AddBeg(1);
-            sut.AddBeg(2);
-            sut.AddEnd(1);
-            sut.AddEnd(2);
-            sut.RemEnd();
-            sut.RemBeg();
-            sut.AddBeg(1);
-            sut.AddBeg(2);
-            sut.AddEnd(1);
-            sut.AddEnd(2);
-            sut.RemBeg();
-            sut.RemBeg();
+            sut.AddEnd("A");
+            sut.AddBeg("B");
+            sut.AddEnd(null);
+            sut.AddBeg("C");
 
-            Assert.NotNull(sut);
+            sut.RemEnd(); 
+            sut.RemBeg();
+            sut.AddEnd("D");
+
+            var items = new[] { sut.RemBeg(), sut.RemEnd() };
+
+            //Assert.All(items, item => Assert.False(string.IsNullOrEmpty(item)));
+
+            items.Should().NotContainNulls();
+            items.Should().OnlyContain(item => !string.IsNullOrWhiteSpace(item));
+
         }
 
         [Fact]
@@ -296,9 +349,14 @@ namespace NetDeque.Test
             sut.RemEnd();
             sut.RemEnd();
 
-            Assert.Equal(4, sut.PeekBeg());
-            Assert.Equal(5, sut.PeekEnd());
-            Assert.Equal(9, sut.Count);
+            //Assert.Equal(4, sut.PeekBeg());
+            //Assert.Equal(5, sut.PeekEnd());
+            //Assert.Equal(9, sut.Count);
+
+            sut.PeekBeg().Should().Be(4);
+            sut.PeekEnd().Should().Be(5);
+            sut.Count.Should().Be(9);   
+
         }
 
     }
